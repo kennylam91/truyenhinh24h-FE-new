@@ -81,4 +81,12 @@ export const actions = {
       method: 'get'
     })
   },
+  // request: {channelId, programId, startTime, endTime, orderBy:[field, order], limit}
+  searchSchedules({ state, dispatch }, data) {
+    return request({
+      url: '/schedules/search',
+      method: 'post',
+      data: data
+    })
+  }
 };

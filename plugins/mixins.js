@@ -37,23 +37,23 @@ Vue.mixin({
       // }, 500)
       // this.$store.dispatch('app/setLoading', false)
     },
-    // fetchScheduleList(channelId, date) {
-    //   const start = date
-    //   start.setHours(0, 0, 0, 0)
-    //   const end = new Date(date.getTime())
-    //   end.setHours(24, 0, 0, 0)
-    //   return new Promise((resolve, reject) => {
-    //     this.$store.dispatch('app/searchSchedules',
-    //       { channelId: channelId,
-    //         startTime: start,
-    //         endTime: end,
-    //         page: 1,
-    //         limit: 99999
-    //       }).then(res => {
-    //       resolve(res)
-    //     })
-    //   })
-    // },
+    fetchScheduleList(channelId, date) {
+      const start = date
+      start.setHours(0, 0, 0, 0)
+      const end = new Date(date.getTime())
+      end.setHours(24, 0, 0, 0)
+      return new Promise((resolve, reject) => {
+        this.$store.dispatch('app/searchSchedules',
+          { channelId: channelId,
+            startTime: start,
+            endTime: end,
+            page: 1,
+            limit: 99999
+          }).then(res => {
+          resolve(res)
+        })
+      })
+    },
     // fetchAllProgramByDate(date) {
     //   if (!this.channelList) {
     //     this.$store.dispatch('app/fetchChannelList')
