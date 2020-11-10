@@ -16,10 +16,10 @@ Vue.mixin({
     }
   },
   methods: {
-    // viewChannelDetail(channel) {
-    //   const name = channel.name.split(' ').join('-').trim()
-    //   this.$router.push({ path: `/lich-chieu/${name}_${channel.id}` })
-    // },
+    viewChannelDetail(channel) {
+      const name = channel.name.split(' ').join('-').trim()
+      this.$router.push({ path: `/lich-chieu/${name}_${channel.id}` })
+    },
     viewProgramDetail(program) {
       let id
       if (!program.name) {

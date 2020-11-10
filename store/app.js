@@ -73,5 +73,12 @@ export const actions = {
       method: 'post',
       data
     })
-  }
+  },
+  // request={channelId: }
+  fetchChannel({ commit }, channelId) {
+    return request({
+      url: '/channels/' + channelId,
+      method: 'get'
+    })
+  },
 };
