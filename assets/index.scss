@@ -1,0 +1,25 @@
+html{
+  word-break: break-word;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.pointer{
+  cursor: pointer;
+}
+.truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.d-block{
+  display: block !important;
+}
+
+.d-inline-block{
+  display: inline-block !important;
+}
