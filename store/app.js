@@ -88,5 +88,15 @@ export const actions = {
       method: 'post',
       data: data
     })
+  },
+  // request = {searchName, categoryCodes, ranks, isBroadCasting, getStartTimeFrom, getStartTimeTo,
+  // page, limit, sortBy, sortDirection(DESC, ASC)}
+  searchProgram({ commit }, data) {
+    const formattedData = { ...data, searchName: (data.searchName || '' + '').toUpperCase() }
+    return request({
+      url: '/programs/search',
+      method: 'post',
+      data: formattedData
+    })
   }
 };
