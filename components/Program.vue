@@ -25,7 +25,7 @@
       </v-tooltip>
 
       <v-card-text class="">
-        <v-row align="center" class="mx-0 mt-0">
+        <v-row v-if="rateShow" align="center" class="mx-0 mb-2">
           <v-rating
             :value="program.rank"
             color="amber"
@@ -35,7 +35,7 @@
             size="16"
           ></v-rating>
         </v-row>
-        <v-row class="mx-0 mt-2">
+        <v-row class="mx-0 mb-2">
           <v-chip class="mr-1" color="purple" :small="true">
             <v-icon class="mr-1" :small="true">
               mdi-television-play
@@ -51,7 +51,7 @@
             <span>{{ startTimeParsed }}</span>
           </v-chip>
         </v-row>
-        <v-sheet class="mt-2">
+        <v-sheet class="mb-2" v-if="categoryShow">
           <v-chip
             v-for="cat in program.categories.filter(i => i.code != 1).slice(0,2)"
             :key="cat.id"
@@ -73,6 +73,16 @@ export default {
     program: {
       required: true,
       type: Object
+    },
+    categoryShow: {
+      type: Boolean,
+      required: false,
+      default: () => true
+    },
+    rateShow: {
+     type: Boolean,
+      required: false,
+      default: () => true 
     }
   },
   computed: {

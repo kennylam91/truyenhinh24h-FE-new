@@ -22,17 +22,19 @@
       class="mb-2"
       v-if="nextDayPrograms"
       :title="'Nổi bật ngày mai'"
-      :data="nextDayPrograms"
+      :data="nextDayPrograms.slice(0,9)"
+      :categoryShow="false"
+      :rateShow="false"
     />
-    <v-card class="mx-2">
-      <v-card-title class="orange--text"> Các kênh nổi bật </v-card-title>
+    <v-card class="mx-2" v-for="networkArr in networkMatrix" :key="networkArr[0]">
+      <v-card-title class="orange--text"> {{networkArr[0]}} </v-card-title>
       <v-row class="mx-1">
         <v-col
           cols="6"
           sm="4"
           md="3"
           lg="2"
-          v-for="(channel, index) in vipChannelList"
+          v-for="(channel, index) in networkArr[1]"
           :key="index"
         >
           <v-card>
@@ -64,6 +66,7 @@ export default {
       nextDayPrograms: null,
       baseQuery: null,
       now: +new Date(),
+      networkMatrix: new Map()
     };
   },
   computed: {
@@ -83,6 +86,7 @@ export default {
     this.fetchTodayNoonPrograms();
     this.fetchTonightPrograms();
     this.fetchNextDayPrograms();
+    this.networkMatrix = this.getNetworkMap()
   },
   methods: {
     fetchBroadCastingPrograms() {
@@ -140,6 +144,17 @@ export default {
           this.nextDayPrograms = res;
         });
     },
+    getNetworkMap(){
+    const networks = this.channelList.map(c => c.networkName).filter(i => i != null)
+    const networkSet = new Set(networks)
+    const networkMatrix = []
+    networkSet.forEach(network => {
+      const channels = this.channelList.filter(c => c.networkName === network)
+      networkMatrix.push([network, channels])
+    })
+    return networkMatrix
+  }
   },
+  
 };
 </script>
