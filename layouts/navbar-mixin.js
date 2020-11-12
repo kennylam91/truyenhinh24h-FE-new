@@ -15,7 +15,6 @@ export default {
   computed: {
     ...mapGetters({
       channelList: "channelList",
-      vipChannelList: "vipChannelList"
     })
   },
   watch: {

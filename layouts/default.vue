@@ -7,7 +7,7 @@
       fixed
       app
     >
-      <v-list>
+      <v-list nav>
         <v-list-item
           v-for="(item, i) in items"
           :key="i"
@@ -54,19 +54,19 @@ export default {
       clipped: false,
       items: [
         {
-          icon: "mdi-apps",
-          title: "Welcome",
+          icon: "mdi-home",
+          title: "Trang chủ",
           to: "/"
         },
         {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire"
-        }
+          icon: "mdi-view-list",
+          title: "Lịch phát sóng",
+          to: "/lich-phat-song"
+        },
+        
       ],
       miniVariant: false,
       drawer: false,
-      items: []
     };
   },
   computed: {

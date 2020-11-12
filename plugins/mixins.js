@@ -19,7 +19,7 @@ Vue.mixin({
         .split(" ")
         .join("-")
         .trim();
-      this.$router.push({ path: `/lich-chieu/${name}_${channel.id}` });
+      this.$router.push({ path: `/lich-phat-song/${name}_${channel.id}` });
     },
     viewProgramDetail(program) {
       let id;
