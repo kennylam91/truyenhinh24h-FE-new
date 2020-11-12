@@ -25,7 +25,11 @@
       </v-list>
     </v-navigation-drawer>
 
-    <navbar-xs class="d-xs-inline d-sm-none" />
+    <navbar-xs
+      class="d-block d-sm-none"
+      @navbar-icon-click="drawer = !drawer"
+    />
+    <navbar class="d-none d-sm-block" @navbar-icon-click="drawer = !drawer" />
 
     <v-main>
       <v-container>
@@ -41,13 +45,13 @@
 <script>
 import { mapGetters } from "vuex";
 import NavbarXs from "./NavbarXs";
+import Navbar from "./Navbar";
 export default {
-  components: { NavbarXs },
+  components: { NavbarXs, Navbar },
   data() {
     return {
-      drawer: false,
-      clipped: false,
       fixed: false,
+      clipped: false,
       items: [
         {
           icon: "mdi-apps",
@@ -61,7 +65,7 @@ export default {
         }
       ],
       miniVariant: false,
-
+      drawer: false,
       items: []
     };
   },

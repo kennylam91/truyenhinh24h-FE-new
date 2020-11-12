@@ -1,7 +1,8 @@
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      
+      clipped: false,
       isShowSearch: false,
       title: "Truyenhinh24h",
       model: "",
@@ -11,8 +12,15 @@ export default {
       isLoading: false
     };
   },
+  computed: {
+    ...mapGetters({
+      channelList: "channelList",
+      vipChannelList: "vipChannelList"
+    })
+  },
   watch: {
     search(val) {
+
       if (this.timerId) {
         clearTimeout(this.timerId);
       }
@@ -60,6 +68,9 @@ export default {
           this.viewChannelDetail(selectedItem);
         }
       }
+    },
+    onNavbarIconClick(){
+      this.$emit('navbar-icon-click')
     }
   }
 };

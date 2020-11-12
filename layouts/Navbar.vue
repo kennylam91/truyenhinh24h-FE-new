@@ -2,11 +2,11 @@
   <div>
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="onNavbarIconClick" />
-      <v-toolbar-title v-if="!isShowSearch">
+      <v-toolbar-title>
         <router-link class="white--text" to="/">{{ title }}</router-link>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
       <v-autocomplete
-        v-if="isShowSearch"
         v-model="model"
         :items="searchAllResults"
         :loading="isLoading"
@@ -22,10 +22,8 @@
         item-text="name"
         item-value="id"
         append-icon=""
-        @blur="
-          isShowSearch = false;
-          searchAllResults = [];
-        "
+        prepend-inner-icon="mdi-magnify"
+        @blur="searchAllResults = []"
         @change="onSearchChange"
       >
         <template v-slot:no-data>
@@ -40,11 +38,6 @@
           </v-list-item-content>
         </template>
       </v-autocomplete>
-      <v-spacer></v-spacer>
-
-      <v-btn icon v-if="!isShowSearch" @click="isShowSearch = true">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
     </v-app-bar>
   </div>
 </template>
