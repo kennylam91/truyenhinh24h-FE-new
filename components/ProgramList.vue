@@ -2,10 +2,24 @@
   <div>
     <v-card class="mx-2">
       <v-card-title class="orange--text">
-        {{title}}
+        {{ title }}
       </v-card-title>
-      <v-row class="mx-1">
+      <v-row class="mx-4 d-block d-sm-none">
+        <v-carousel
+          :continuous="true"
+          :cycle="true"
+          hide-delimiters
+          hide-delimiter-background
+          height="auto"
+        >
+          <v-carousel-item v-for="program in data" :key="program.id">
+            <Program :program="program" :categoryShow="categoryShow" />
+          </v-carousel-item>
+        </v-carousel>
+      </v-row>
+      <v-row class="mx-1 d-none d-sm-flex">
         <v-col
+          class="d-xs-none d-sm-block"
           cols="12"
           sm="6"
           md="4"
@@ -13,7 +27,12 @@
           v-for="(program, index) in data"
           :key="index"
         >
-          <Program :program="program" />
+          <Program
+            class="d-xs-none d-sm-block"
+            :program="program"
+            :categoryShow="categoryShow"
+            :rateShow="rateShow"
+          />
         </v-col>
       </v-row>
     </v-card>
@@ -23,22 +42,31 @@
 import Program from "@/components/Program";
 export default {
   components: {
-    Program
+    Program,
   },
-  props:{
-    title:{
+  props: {
+    title: {
       type: String,
-      required: true
+      required: true,
     },
-    data:{
+    data: {
       type: Array,
       required: false,
-      default: () => []
-    }
+      default: () => [],
+    },
+    categoryShow: {
+      type: Boolean,
+      required: false,
+      default: () => true,
+    },
+    rateShow: {
+      type: Boolean,
+      required: false,
+      default: () => true,
+    },
   },
   data() {
-    return {
-    };
-  }
+    return {};
+  },
 };
 </script>
