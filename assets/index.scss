@@ -23,3 +23,10 @@ a {
 .d-inline-block{
   display: inline-block !important;
 }
+
+
+.search-result-img{
+  @extend .pointer;
+  max-width: 70px !important;
+  margin: 4px 8px 4px 0;
+}

@@ -48,11 +48,11 @@
             <v-col cols="5" sm="6">
               <v-btn-toggle v-model="quickDateSelect" color="orange">
                 <v-btn>
-                  <v-icon class="mr-2">mdi-calendar-clock</v-icon>
+                  <v-icon class="mx-2">mdi-calendar-clock</v-icon>
                   <span class="d-none d-sm-inline">Hôm nay</span>
                 </v-btn>
                 <v-btn>
-                  <v-icon class="mr-2">mdi-skip-forward</v-icon>
+                  <v-icon class="mx-2">mdi-skip-forward</v-icon>
                   <span class="d-none d-sm-inline">Ngày mai</span>
                 </v-btn>
               </v-btn-toggle>
