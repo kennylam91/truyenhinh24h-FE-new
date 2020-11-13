@@ -41,7 +41,21 @@
             </v-col>
           </v-row>
 
-          <v-divider class="mx-4 mt-3"></v-divider>
+          <v-divider class="mx-4 my-4"></v-divider>
+          <ProgramScheduleTable
+            :programName="program.name"
+            :scheduleList="scheduleList"
+          />
+          <v-divider class="mx-4 my-4"></v-divider>
+          <div class="row mx-4">
+            <div class="embed-responsive embed-responsive-16by9">
+            <span v-html="program.trailer"></span>
+          </div>
+          </div>
+          <v-divider class="mx-4 mt-4"></v-divider>
+          <v-card-text>
+            {{program.description}}
+          </v-card-text>
           <!-- <v-row class="px-4">
             <v-col cols="7" sm="6">
               <v-menu
@@ -94,12 +108,15 @@
   </div>
 </template>
 <script>
+import ProgramScheduleTable from "./ProgramScheduleTable";
 export default {
+  components: { ProgramScheduleTable },
   data() {
     return {
       program: null,
       programId: null,
-      isDescShow: false
+      isDescShow: false,
+      scheduleList: []
     };
   },
   computed: {},

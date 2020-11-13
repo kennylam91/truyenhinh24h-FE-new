@@ -16,6 +16,11 @@
 // {w} Weekday name in full (Sunday to Saturday, Sunday=0 and Saturday=6)
 // {Y} Year as a numeric, 4-digit value
 // {y} Year as a numeric, 2-digit value
+/**
+ * 
+ * @param {Date} timeInput 
+ * @param {String} format 
+ */
 export function parseTime(timeInput, format) {
   if (arguments.length === 0 || !timeInput) {
     return null;
