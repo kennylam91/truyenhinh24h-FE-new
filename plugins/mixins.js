@@ -35,7 +35,7 @@ Vue.mixin({
         .trim();
       const enConvertedName = convertVNToEN(name).toLowerCase();
       this.$router.push({
-        path: `/chi-tiet-chuong-trinh/${enConvertedName}_${id}`
+        path: `/chuong-trinh/${enConvertedName}_${id}`
       });
     },
     fetchScheduleList(channelId, date) {

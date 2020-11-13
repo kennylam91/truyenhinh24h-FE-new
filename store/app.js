@@ -98,5 +98,12 @@ export const actions = {
       method: 'post',
       data: formattedData
     })
-  }
+  },
+  // request = {programId}
+  fetchProgram({ commit }, programId) {
+    return request({
+      url: '/programs/' + programId,
+      method: 'get'
+    })
+  },
 };
