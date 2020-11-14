@@ -16,6 +16,8 @@
         <v-chip
           dark
           color="purple"
+          :small="true"
+          class="d-sm-none d-inline-block"
           @click="
             viewChannelDetail({ name: item.channelName, id: item.channelId })
           "
@@ -25,10 +27,29 @@
           </v-icon>
           {{ item.channelName }}
         </v-chip>
+        <v-chip
+          dark
+          color="purple"
+          class="d-sm-inline-block d-none"
+          @click="
+            viewChannelDetail({ name: item.channelName, id: item.channelId })
+          "
+        >
+          <v-icon class="mr-1" :small="false">
+            mdi-television-play
+          </v-icon>
+          {{ item.channelName }}
+        </v-chip>
       </template>
       <template v-slot:item.startTime="{ item }">
-        <v-chip color="indigo" >
-          <v-icon class="mr-1">
+        <v-chip color="indigo" :small="true" class="d-sm-none d-inline-block">
+          <v-icon class="mr-1" :small="true">
+            mdi-clock-time-three-outline
+          </v-icon>
+          <span>{{ new Date(item.startTime) | parseTimeFullFormat }}</span>
+        </v-chip>
+        <v-chip color="indigo" class="d-sm-inline-block d-none">
+          <v-icon class="mr-1" :small="true">
             mdi-clock-time-three-outline
           </v-icon>
           <span>{{ new Date(item.startTime) | parseTimeFullFormat }}</span>
@@ -39,18 +60,10 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      scheduleTableHeaders: [
-        { text: "Kênh", value: "channel", align: "center" },
-        { text: "Thời gian", value: "startTime", align: "center" }
-      ]
-    };
-  },
   props: {
     programName: {
       required: true,
-      type: String | null
+      type: [String, null]
     },
     scheduleList: {
       required: true,
@@ -60,6 +73,14 @@ export default {
       required: false,
       type: Boolean
     }
+  },
+  data() {
+    return {
+      scheduleTableHeaders: [
+        { text: 'Kênh', value: 'channel', align: 'center' },
+        { text: 'Thời gian', value: 'startTime', align: 'center' }
+      ]
+    }
   }
-};
+}
 </script>
