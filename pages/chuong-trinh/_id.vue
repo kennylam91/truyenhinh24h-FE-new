@@ -23,9 +23,9 @@
                 readonly
                 size="16"
               />
-              <v-sheet class="mb-2">
+              <v-sheet v-if="program.categories" class="mb-2">
                 <v-chip
-                  v-for="cat in program.categories.filter(i => i.code != 1)"
+                  v-for="cat in program.categories"
                   :key="cat.id"
                   :small="false"
                   class="mr-1 mb-1"
@@ -72,6 +72,7 @@ export default {
   computed: {},
   mounted() {
     const now = new Date()
+    debugger
     this.programId = this.$route.params.id
       .split('_')
       .pop()

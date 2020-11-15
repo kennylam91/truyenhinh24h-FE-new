@@ -49,7 +49,6 @@
                   label="Chọn ngày phát sóng"
                   prepend-icon="mdi-calendar"
                   readonly
-                  hint="DD/MM/YYYY format"
                   v-bind="attrs"
                   v-on="on"
                 />

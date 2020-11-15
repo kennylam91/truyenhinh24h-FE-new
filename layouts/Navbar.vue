@@ -5,7 +5,7 @@
       <v-toolbar-title>
         <router-link class="white--text" to="/">{{ title }}</router-link>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-autocomplete
         v-model="model"
         :items="searchAllResults"
@@ -32,7 +32,7 @@
           </v-list-item>
         </template>
         <template v-slot:item="{ item }">
-          <v-img :src="item.logo" class="search-result-img"> </v-img>
+          <v-img :src="item.logo" class="search-result-img" />
           <v-list-item-content>
             <span class="text-caption">{{ item.name }}</span>
           </v-list-item-content>
@@ -42,8 +42,8 @@
   </div>
 </template>
 <script>
-import NavbarMixin from "./navbar-mixin";
+import NavbarMixin from './navbar-mixin'
 export default {
   mixins: [NavbarMixin]
-};
+}
 </script>
