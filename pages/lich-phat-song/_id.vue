@@ -5,19 +5,18 @@
         <v-card>
           <v-row class="px-4">
             <v-col cols="12" sm="6" md="4">
-              <v-img :src="channel.logo"> </v-img>
+              <v-img :src="channel.logo" />
             </v-col>
             <v-col cols="12" sm="6" md="8">
               <v-card-title class="purple--text pt-0 px-0">
                 Kênh {{ channel.name }}
               </v-card-title>
-              <v-card-text class="py-0 px-0">
+              <v-card-text class="d-sm-block d-none px-0">
                 {{ channel.description }}
               </v-card-text>
             </v-col>
           </v-row>
-
-          <v-divider class="mx-4 mt-3"></v-divider>
+          <v-divider class="mx-4 mt-0" />
           <v-row class="px-4">
             <v-col cols="7" sm="6">
               <v-menu
@@ -37,16 +36,16 @@
                     hint="DD/MM/YYYY format"
                     v-bind="attrs"
                     v-on="on"
-                  ></v-text-field>
+                  />
                 </template>
                 <v-date-picker
                   v-model="selectedDate"
                   @input="onDatePickerInput"
-                ></v-date-picker>
+                />
               </v-menu>
             </v-col>
             <v-col cols="5" sm="6">
-              <v-btn-toggle v-model="quickDateSelect" color="orange">
+              <v-btn-toggle v-model="quickDateSelect" color="white">
                 <v-btn>
                   <v-icon class="mx-2">mdi-calendar-clock</v-icon>
                   <span class="d-none d-sm-inline">Hôm nay</span>
@@ -59,38 +58,43 @@
             </v-col>
           </v-row>
           <schedule-table
-            :channelName="channel.name"
-            :scheduleList="scheduleList"
-            :formattedDate="computedDateFormatted"
+            :channel-name="channel.name"
+            :schedule-list="scheduleList"
+            :formatted-date="computedDateFormatted"
             :loading="tableLoading"
           />
+          <v-divider class="mx-4 mt-3" />
+          <v-card-text class="d-sm-none">
+            {{ channel.description }}
+          </v-card-text>
+
         </v-card>
       </v-col>
     </v-row>
   </div>
 </template>
 <script>
-import ScheduleMixin from "./schedule-mixin";
-import ScheduleTable from "./ScheduleTable";
+import ScheduleMixin from './schedule-mixin'
+import ScheduleTable from './ScheduleTable'
 export default {
-  asyncData({ params, store }) {
-    const channelId = params.id.split("_").pop();
-    return store.dispatch("app/fetchChannel", channelId).then(channel => {
-      return { channel, channelId };
-    });
-  },
   components: { ScheduleTable },
   mixins: [ScheduleMixin],
+  asyncData({ params, store }) {
+    const channelId = params.id.split('_').pop()
+    return store.dispatch('app/fetchChannel', channelId).then(channel => {
+      return { channel, channelId }
+    })
+  },
   data() {
     return {
       channel: null
-    };
+    }
   },
   computed: {},
   watch: {},
   mounted() {
-    this.getScheduleList(new Date());
+    this.getScheduleList(new Date())
   },
   methods: {}
-};
+}
 </script>

@@ -12,20 +12,18 @@
       :items-per-page="100"
       :loading="loading"
     >
-      <template v-slot:item.channel="{ item }">
+      <template v-slot:[`item.channel`]="{ item }">
         <v-chip
           dark
           color="purple"
           :small="true"
           class="d-sm-none d-inline-block"
-          @click="
-            viewChannelDetail({ name: item.channelName, id: item.channelId })
-          "
+          @click=" viewChannelDetail({ name: item.channelName, id: item.channelId }) "
         >
           <v-icon class="mr-1" :small="true">
             mdi-television-play
           </v-icon>
-          {{ item.channelName }}
+          <span class="text--underline">{{ item.channelName }}</span>
         </v-chip>
         <v-chip
           dark
@@ -38,10 +36,10 @@
           <v-icon class="mr-1" :small="false">
             mdi-television-play
           </v-icon>
-          {{ item.channelName }}
+          <span class="text--underline">{{ item.channelName }}</span>
         </v-chip>
       </template>
-      <template v-slot:item.startTime="{ item }">
+      <template v-slot:[`item.startTime`]="{ item }">
         <v-chip color="indigo" :small="true" class="d-sm-none d-inline-block">
           <v-icon class="mr-1" :small="true">
             mdi-clock-time-three-outline

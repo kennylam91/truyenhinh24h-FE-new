@@ -12,31 +12,30 @@
       :items-per-page="100"
       :loading="loading"
     >
-      <!-- <template v-slot:item.calories="{ item }">
-      <v-chip
-        :color="getColor(item.calories)"
-        dark
-      >
-        {{ item.calories }}
-      </v-chip>
-    </template> -->
+      <template v-slot:[`item.parsedStartTime`]="{ item }">
+        {{ item.parsedStartTime }}
+      </template>
+      <template v-slot:[`item.programName`]="{ item }">
+        <div
+          v-if="item.programId"
+          class="pointer text--underline"
+          @click="viewProgramDetail({id: item.programId, name: item.programName})"
+        >
+          {{ item.programName }}
+        </div>
+        <div v-else>
+          {{ item.programName }}
+        </div>
+      </template>
     </v-data-table>
   </div>
 </template>
 <script>
 export default {
-  data() {
-    return {
-      scheduleTableHeaders: [
-        { text: "Time", value: "parsedStartTime", width: 80 },
-        { text: "Chương trình", value: "programName" }
-      ]
-    };
-  },
   props: {
     channelName: {
       required: true,
-      type: String | null
+      type: [String, null]
     },
     scheduleList: {
       required: true,
@@ -46,10 +45,18 @@ export default {
       required: true,
       type: String
     },
-    loading:{
+    loading: {
       required: false,
       type: Boolean
     }
+  },
+  data() {
+    return {
+      scheduleTableHeaders: [
+        { text: 'Time', value: 'parsedStartTime', width: 80 },
+        { text: 'Chương trình', value: 'programName' }
+      ]
+    }
   }
-};
+}
 </script>

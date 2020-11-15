@@ -17,19 +17,19 @@
 // {Y} Year as a numeric, 4-digit value
 // {y} Year as a numeric, 2-digit value
 /**
- * 
- * @param {Date} timeInput 
- * @param {String} format 
+ *
+ * @param {Date} timeInput
+ * @param {String} format
  */
 export function parseTime(timeInput, format) {
   if (arguments.length === 0 || !timeInput) {
-    return null;
+    return null
   }
-  let time;
-  if (typeof timeInput === "object") {
-    time = timeInput;
+  let time
+  if (typeof timeInput === 'object') {
+    time = timeInput
   } else {
-    return null;
+    return null
   }
   const formatObj = {
     d: time
@@ -50,9 +50,9 @@ export function parseTime(timeInput, format) {
     l:
       time.getHours() < 12
         ? time
-            .getHours()
-            .toString()
-            .padStart(2, 0)
+          .getHours()
+          .toString()
+          .padStart(2, 0)
         : (time.getHours() - 12).toString().padStart(2, 0),
     k: time.getHours().toString(),
     i: time
@@ -66,41 +66,41 @@ export function parseTime(timeInput, format) {
       .padStart(2, 0),
     S: time.getSeconds().toString(),
     w: time.getDay().toString(),
-    p: time.getHours() < 12 ? "AM" : "PM"
-  };
+    p: time.getHours() < 12 ? 'AM' : 'PM'
+  }
   const timeStr = format.replace(/{([dmMyYHiIsSDkghlwp])+}/g, (result, key) => {
-    if (key === "g") {
+    if (key === 'g') {
       const monthMap = new Map([
-        ["1", "January"],
-        ["2", "February"],
-        ["3", "March"],
-        ["4", "April"],
-        ["5", "May"],
-        ["6", "June"],
-        ["7", "July"],
-        ["8", "August"],
-        ["9", "September"],
-        ["10", "October"],
-        ["11", "November"],
-        ["12", "December"]
-      ]);
-      return monthMap.get(formatObj[key]);
+        ['1', 'January'],
+        ['2', 'February'],
+        ['3', 'March'],
+        ['4', 'April'],
+        ['5', 'May'],
+        ['6', 'June'],
+        ['7', 'July'],
+        ['8', 'August'],
+        ['9', 'September'],
+        ['10', 'October'],
+        ['11', 'November'],
+        ['12', 'December']
+      ])
+      return monthMap.get(formatObj[key])
     }
-    if (key === "w") {
+    if (key === 'w') {
       const weekdayMap = new Map([
-        ["0", "Thứ bảy"],
-        ["1", "Thứ hai"],
-        ["2", "Thứ ba"],
-        ["3", "Thứ tư"],
-        ["4", "Thứ năm"],
-        ["5", "Thứ sáu"],
-        ["6", "Thứ bảy"]
-      ]);
-      return weekdayMap.get(formatObj[key]);
+        ['0', 'Thứ bảy'],
+        ['1', 'Thứ hai'],
+        ['2', 'Thứ ba'],
+        ['3', 'Thứ tư'],
+        ['4', 'Thứ năm'],
+        ['5', 'Thứ sáu'],
+        ['6', 'Thứ bảy']
+      ])
+      return weekdayMap.get(formatObj[key])
     }
-    return formatObj[key];
-  });
-  return timeStr;
+    return formatObj[key]
+  })
+  return timeStr
 }
 
 /**
@@ -109,13 +109,13 @@ export function parseTime(timeInput, format) {
  */
 export function trimObject(source) {
   if (!source) {
-    return null;
+    return null
   }
   Object.keys(source).forEach(function(key) {
     source[key] =
-      typeof source[key] === "string" ? source[key].trim() : source[key];
-  });
-  return source;
+      typeof source[key] === 'string' ? source[key].trim() : source[key]
+  })
+  return source
 }
 /**
  * convert Vietnamese to English
@@ -124,8 +124,8 @@ export function trimObject(source) {
  */
 export function convertVNToEN(str) {
   return str
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/đ/g, "d")
-    .replace(/Đ/g, "D");
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D')
 }

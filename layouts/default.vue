@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import NavbarXs from "./NavbarXs";
-import Navbar from "./Navbar";
+import { mapGetters } from 'vuex'
+import NavbarXs from './NavbarXs'
+import Navbar from './Navbar'
 export default {
   components: { NavbarXs, Navbar },
   data() {
@@ -54,28 +54,28 @@ export default {
       clipped: false,
       items: [
         {
-          icon: "mdi-home",
-          title: "Trang chủ",
-          to: "/"
+          icon: 'mdi-home',
+          title: 'Trang chủ',
+          to: '/'
         },
         {
-          icon: "mdi-view-list",
-          title: "Lịch phát sóng",
-          to: "/lich-phat-song"
-        },
-        
+          icon: 'mdi-view-list',
+          title: 'Lịch phát sóng',
+          to: '/lich-phat-song'
+        }
+
       ],
       miniVariant: false,
-      drawer: false,
-    };
+      drawer: false
+    }
   },
   computed: {
     ...mapGetters({
-      channelList: "channelList",
-      vipChannelList: "vipChannelList"
+      channelList: 'channelList',
+      vipChannelList: 'vipChannelList'
     })
   },
   watch: {},
   methods: {}
-};
+}
 </script>

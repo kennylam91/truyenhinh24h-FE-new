@@ -1,7 +1,7 @@
-import Vue from "vue";
+import Vue from 'vue'
 // import { COMMON, CATEGORIES } from '@/assets/utils/constant'
 // import { convertVNToEN } from '@/assets/utils'
-import { parseTime, convertVNToEN } from "~/assets/js/utils";
+import { parseTime } from '~/assets/js/utils'
 
 Vue.mixin({
   data() {
@@ -11,41 +11,32 @@ Vue.mixin({
       // defaultTags: [COMMON.SCHEDULE + ' HBO', COMMON.SCHEDULE + ' FOX MOVIES',
       //   COMMON.SCHEDULE + ' CINEMAX', COMMON.SCHEDULE + ' AXN', COMMON.SCHEDULE + ' DISCOVERY',
       //   COMMON.SCHEDULE + ' RED BY HBO', COMMON.TODAY_SCHEDULE, COMMON.TODAY_SCHEDULE_2]
-    };
+    }
   },
   methods: {
     viewChannelDetail(channel) {
       const name = channel.name
-        .split(" ")
-        .join("-")
-        .trim();
-      this.$router.push({ path: `/lich-phat-song/${name}_${channel.id}` });
+        .split(' ')
+        .join('-')
+        .trim()
+      this.$router.push({ path: `/lich-phat-song/${name}_${channel.id}` })
     },
     viewProgramDetail(program) {
-      let id;
-      if (!program.name) {
-        program.name = program.programName;
-        id = program.programId;
-      } else {
-        id = program.id;
-      }
-      const name = (program.name + " " + program.enName)
-        .split(/[\s:]+/)
-        .join("-")
-        .trim();
-      const enConvertedName = convertVNToEN(name).toLowerCase();
+      const name = program.name.split(/[\s:]+/).join('-')
+        .replace(/[-]+/g, '-')
+        .trim().toLowerCase()
       this.$router.push({
-        path: `/chuong-trinh/${enConvertedName}_${id}`
-      });
+        path: `/chuong-trinh/${name}_${program.id}`
+      })
     },
     fetchScheduleList(channelId, date) {
-      const start = date;
-      start.setHours(0, 0, 0, 0);
-      const end = new Date(date.getTime());
-      end.setHours(24, 0, 0, 0);
+      const start = date
+      start.setHours(0, 0, 0, 0)
+      const end = new Date(date.getTime())
+      end.setHours(24, 0, 0, 0)
       return new Promise((resolve, reject) => {
         this.$store
-          .dispatch("app/searchSchedules", {
+          .dispatch('app/searchSchedules', {
             channelId: channelId,
             startTime: start,
             endTime: end,
@@ -53,9 +44,9 @@ Vue.mixin({
             limit: 99999
           })
           .then(res => {
-            resolve(res);
-          });
-      });
+            resolve(res)
+          })
+      })
     },
     // fetchAllProgramByDate(date) {
     //   if (!this.channelList) {
@@ -184,7 +175,7 @@ Vue.mixin({
     //   this.$router.push(`/programs/edit/${programId}`)
     // },
     parseTime(time, format) {
-      return parseTime(time, format);
+      return parseTime(time, format)
     }
     // endOfToday() {
     //   return (new Date()).setHours(24, 0, 0, 0)
@@ -193,4 +184,4 @@ Vue.mixin({
     //   return (new Date()).setHours(0, 0, 0, 0)
     // }
   }
-});
+})

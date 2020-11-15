@@ -1,9 +1,9 @@
 <template>
   <v-sheet>
-    <v-card class="mx-auto">
+    <v-card class="mx-auto" outlined>
       <v-sheet>
         <v-img
-          :src="program.logo"
+          :src="program.logo || defaultImg"
           class="white--text align-end pointer"
           @click="viewProgramDetail(program)"
         >
@@ -14,12 +14,11 @@
         <template v-slot:activator="{ on, attrs }">
           <v-card-title
             v-bind="attrs"
-            v-on="on"
             class="truncate d-block"
             style="font-size: 1.125rem;"
+            v-on="on"
           >
-            {{ program.name }}</v-card-title
-          >
+            {{ program.name }}</v-card-title>
         </template>
         <span>{{ program.name }}</span>
       </v-tooltip>
@@ -33,16 +32,16 @@
             half-increments
             readonly
             size="16"
-          ></v-rating>
+          />
         </v-row>
         <v-row class="mx-0 mb-2">
           <v-chip class="mr-1" color="purple" :small="true">
             <v-icon class="mr-1" :small="true">
               mdi-television-play
             </v-icon>
-            <router-link class="white--text" :to="'/kenh'">
+            <span class="white--text text--underline pointer" @click="goToChannelDetail()">
               {{ program.schedules[0].channelName }}
-            </router-link>
+            </span>
           </v-chip>
           <v-chip color="indigo" :small="true">
             <v-icon class="mr-1" :small="true">
@@ -51,7 +50,7 @@
             <span>{{ startTimeParsed }}</span>
           </v-chip>
         </v-row>
-        <v-sheet class="mb-2" v-if="categoryShow">
+        <v-sheet v-if="categoryShow" class="mb-2">
           <v-chip
             v-for="cat in program.categories.filter(i => i.code != 1).slice(0,2)"
             :key="cat.id"
@@ -68,7 +67,7 @@
 </template>
 <script>
 export default {
-  name: "Program",
+  name: 'Program',
   props: {
     program: {
       required: true,
@@ -80,24 +79,37 @@ export default {
       default: () => true
     },
     rateShow: {
-     type: Boolean,
+      type: Boolean,
       required: false,
-      default: () => true 
+      default: () => true
+    }
+  },
+  data() {
+    return {
+      defaultImg: require('@/assets/images/default-program-picture.png')
     }
   },
   computed: {
     startTimeParsed() {
       return this.parseTime(
         new Date(this.program.schedules[0].startTime),
-        "{H}:{i}"
-      );
+        '{H}:{i}'
+      )
     },
     endTimeParsed() {
       return this.parseTime(
         new Date(this.program.schedules[0].endTime),
-        "{H}:{i}"
-      );
+        '{H}:{i}'
+      )
+    }
+
+  },
+  methods: {
+    goToChannelDetail() {
+      const schedule = this.program.schedules[0]
+      const channel = { id: schedule.channelId, name: schedule.channelName }
+      this.viewChannelDetail(channel)
     }
   }
-};
+}
 </script>

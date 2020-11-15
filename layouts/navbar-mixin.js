@@ -1,75 +1,74 @@
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
       clipped: false,
       isShowSearch: false,
-      title: "Truyenhinh24h",
-      model: "",
+      title: 'Truyenhinh24h.live',
+      model: '',
       searchAllResults: [],
       search: null,
       timerId: null,
       isLoading: false
-    };
+    }
   },
   computed: {
     ...mapGetters({
-      channelList: "channelList",
+      channelList: 'channelList'
     })
   },
   watch: {
     search(val) {
-
       if (this.timerId) {
-        clearTimeout(this.timerId);
+        clearTimeout(this.timerId)
       }
-
-      const lowerCaseSearchText = (val && val.trim().toLowerCase()) || "";
+      const lowerCaseSearchText = (val && val.trim().toLowerCase()) || ''
       if (lowerCaseSearchText.length < 2) {
+        return
       } else {
         this.timerId = setTimeout(() => {
-          this.isLoading = true;
-          this.searchAllResults = [];
+          this.isLoading = true
+          this.searchAllResults = []
           const channelSearchResult = this.channelList.filter(channel => {
-            return channel.name.toLowerCase().includes(lowerCaseSearchText);
-          });
+            return channel.name.toLowerCase().includes(lowerCaseSearchText)
+          })
 
           this.searchAllResults = this.searchAllResults.concat(
             channelSearchResult
-          );
+          )
           this.$store
-            .dispatch("app/searchProgram", {
+            .dispatch('app/searchProgram', {
               searchName: val,
               page: 1,
               limit: 8
             })
             .then(res => {
-              this.searchAllResults = this.searchAllResults.concat(res.content);
+              this.searchAllResults = this.searchAllResults.concat(res.content)
             })
             .finally(() => {
-              this.isLoading = false;
-            });
-          this.visible = true;
-        }, 500);
+              this.isLoading = false
+            })
+          this.visible = true
+        }, 500)
       }
     }
   },
   methods: {
     onSearchChange(value) {
-      this.isShowSearch = false;
+      this.isShowSearch = false
       const selectedItem = this.searchAllResults.find(
         item => item.id === value
-      );
+      )
       if (selectedItem) {
         if (selectedItem.rank) {
-          this.viewProgramDetail(selectedItem);
+          this.viewProgramDetail(selectedItem)
         } else {
-          this.viewChannelDetail(selectedItem);
+          this.viewChannelDetail(selectedItem)
         }
       }
     },
-    onNavbarIconClick(){
+    onNavbarIconClick() {
       this.$emit('navbar-icon-click')
     }
   }
-};
+}
