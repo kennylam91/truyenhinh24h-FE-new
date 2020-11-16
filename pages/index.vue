@@ -27,14 +27,14 @@
       :rate-show="false"
     />
     <v-card
-      v-for="networkArr in networkMatrix"
-      :key="networkArr[0]"
+      v-for="categoryArr in categoryMatrix"
+      :key="categoryArr[0]"
       class="mx-2"
     >
-      <v-card-title class="orange--text"> {{ networkArr[0] }} </v-card-title>
+      <v-card-title class="orange--text"> {{ categoryArr[0] }} </v-card-title>
       <v-row class="mx-1">
         <v-col
-          v-for="(channel, index) in networkArr[1]"
+          v-for="(channel, index) in categoryArr[1]"
           :key="index"
           cols="6"
           sm="4"
@@ -69,7 +69,7 @@ export default {
       nextDayPrograms: null,
       baseQuery: null,
       now: +new Date(),
-      networkMatrix: new Map()
+      categoryMatrix: new Map()
     }
   },
   computed: {
@@ -89,7 +89,7 @@ export default {
     this.fetchTodayNoonPrograms()
     this.fetchTonightPrograms()
     this.fetchNextDayPrograms()
-    this.networkMatrix = this.getNetworkMap()
+    this.categoryMatrix = this.getCategoryMap()
   },
   methods: {
     fetchBroadCastingPrograms() {
@@ -147,19 +147,19 @@ export default {
           this.nextDayPrograms = res
         })
     },
-    getNetworkMap() {
-      const networks = this.channelList
-        .map(c => c.networkName)
+    getCategoryMap() {
+      const categories = this.channelList
+        .map(c => c.category)
         .filter(i => i != null)
-      const networkSet = new Set(networks)
-      const networkMatrix = []
-      networkSet.forEach(network => {
+      const categorySet = new Set(categories)
+      const categoryMatrix = []
+      categorySet.forEach(cat => {
         const channels = this.channelList.filter(
-          c => c.networkName === network
+          c => c.category === cat
         )
-        networkMatrix.push([network, channels])
+        categoryMatrix.push([cat, channels])
       })
-      return networkMatrix
+      return categoryMatrix
     }
   }
 }
