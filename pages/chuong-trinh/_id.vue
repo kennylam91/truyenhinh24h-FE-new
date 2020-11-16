@@ -72,7 +72,6 @@ export default {
   computed: {},
   mounted() {
     const now = new Date()
-    debugger
     this.programId = this.$route.params.id
       .split('_')
       .pop()

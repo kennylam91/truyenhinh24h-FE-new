@@ -7,7 +7,7 @@
           class="white--text align-end pointer"
           @click="viewProgramDetail(program)"
         >
-          <div class="orange--text px-2 subtitle-2">{{ program.enName }}</div>
+          <!-- <div class="orange--text px-2 subtitle-2">{{ program.enName }}</div> -->
         </v-img>
       </v-sheet>
       <v-tooltip top>

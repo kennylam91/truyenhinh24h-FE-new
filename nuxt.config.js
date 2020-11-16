@@ -17,7 +17,10 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [
+      { src: 'https://apis.google.com/js/api.js' }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -30,7 +33,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/mixins', '@/plugins/filters'],
+  plugins: ['@/plugins/mixins',
+    '@/plugins/filters',
+    { src: '@/plugins/gg-calendar', mode: 'client' }
+  ],
   /*
    ** Nuxt.js dev-modules
    */

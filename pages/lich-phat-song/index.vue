@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-card-title class="text--center">
+      <v-card-title class="white--text">
         Lịch phát sóng
       </v-card-title>
       <v-card-text>
