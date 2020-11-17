@@ -53,11 +53,48 @@
           <span>{{ new Date(item.startTime) | parseTimeFullFormat }}</span>
         </v-chip>
       </template>
+      <template v-slot:[`item.notify`]="{ item }">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              v-if="isShowBellRing(item)"
+              :disabled="isBellRingDisabled(item)"
+              icon
+            >
+              <v-icon
+                class="pointer"
+                color="pink"
+                dark
+                v-bind="attrs"
+                v-on="on"
+                @click="addScheduleToGGCal(item)"
+              >
+                mdi-bell-ring
+              </v-icon>
+            </v-btn>
+          </template>
+          <span v-if="!isBellRingDisabled(item)">Thêm vào Google Calendar</span>
+        </v-tooltip>
+      </template>
     </v-data-table>
+    <v-snackbar
+      v-model="alert"
+      timeout="2000"
+      color="success"
+      top
+      text
+      centered
+      dark
+    >
+      Thêm vào Google Calendar thành công
+
+    </v-snackbar>
   </div>
 </template>
 <script>
+import GoogleCalendarMixin from '@/components/google-calendar-mixin'
 export default {
+  mixins: [GoogleCalendarMixin],
   props: {
     programName: {
       required: true,
@@ -76,7 +113,8 @@ export default {
     return {
       scheduleTableHeaders: [
         { text: 'Kênh', value: 'channel', align: 'center' },
-        { text: 'Thời gian', value: 'startTime', align: 'center' }
+        { text: 'Thời gian', value: 'startTime', align: 'center' },
+        { text: '', value: 'notify' }
       ]
     }
   }

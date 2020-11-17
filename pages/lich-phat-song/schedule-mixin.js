@@ -77,5 +77,6 @@ export default {
         this.tableLoading = false
       })
     }
+
   }
 }

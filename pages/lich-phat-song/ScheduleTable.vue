@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-data-table
+      :key="scheduleTableKey"
       :caption="`Lịch phát sóng kênh ${channelName} ngày ${formattedDate}`"
       :headers="scheduleTableHeaders"
       :items="scheduleList"
@@ -30,15 +31,24 @@
       <template v-slot:[`item.notify`]="{ item }">
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <v-icon
-              class="pointer"
-              color="purple lighten"
-              dark
-              v-bind="attrs"
-              v-on="on"
-              @click="addScheduleToGGCal(item)"
+            <v-btn
+              v-if="isShowBellRing(item)"
+              :disabled="isBellRingDisabled(item)"
+              icon
             >
-              mdi-bell-ring
+              <v-icon
+                class="pointer"
+                color="pink"
+                dark
+                v-bind="attrs"
+                v-on="on"
+                @click="addScheduleToGGCal(item)"
+              >
+                mdi-bell-ring
+              </v-icon>
+            </v-btn>
+            <v-icon v-if="isBroadCasting(item)" color="success" class="px-2">
+              mdi-television-classic
             </v-icon>
           </template>
           <span>Thêm vào Google Calendar</span>
@@ -60,7 +70,9 @@
   </div>
 </template>
 <script>
+import GoogleCalendarMixin from '@/components/google-calendar-mixin'
 export default {
+  mixins: [GoogleCalendarMixin],
   props: {
     channelName: {
       required: true,
@@ -85,50 +97,12 @@ export default {
         { text: 'Time', value: 'parsedStartTime', width: 80 },
         { text: 'Chương trình', value: 'programName' },
         { text: '', value: 'notify' }
-      ],
-      alert: false,
-      addedSchedule: []
+      ]
+
     }
   },
   methods: {
-    addScheduleToGGCal(schedule) {
-      const isSignedIn = gapi.auth2.getAuthInstance().isSignedIn.get()
-      if (!isSignedIn) {
-        gapi.auth2.getAuthInstance().signIn().then(() => {
-        })
-      } else {
-        this.addEvent(schedule)
-      }
-    },
-    addEvent(schedule) {
-      const event = {
-        'summary': schedule.channelName + '-' + schedule.programName,
-        'start': {
-          'dateTime': new Date(schedule.startTime),
-          // 'dateTime': new Date(2020, 5, 7, 0, 0, 0, 0),
-          'timeZone': 'Etc/GMT+7'
-        },
-        'end': {
-          'dateTime': new Date(schedule.endTime),
-          // 'dateTime': new Date(2020, 5, 8, 0, 0, 0, 0),
-          'timeZone': 'Etc/GMT+7'
-        },
-        'reminders': {
-          'useDefault': false,
-          'overrides': [
-            { 'method': 'popup', 'minutes': 10 }
-          ]
-        }
-      }
-      var request = gapi.client.calendar.events.insert({
-        'calendarId': 'primary',
-        'resource': event
-      })
-      request.execute((event) => {
-        this.alert = true
-        this.addedSchedule.push(schedule)
-      })
-    }
+
   }
 }
 </script>

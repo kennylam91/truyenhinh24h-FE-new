@@ -60,7 +60,7 @@
             </v-menu>
           </v-col>
           <v-col cols="5" sm="6" md="4">
-            <v-btn-toggle v-model="quickDateSelect" color="white">
+            <v-btn-toggle v-model="quickDateSelect" color="secondary">
               <v-btn>
                 <v-icon class="mx-2">mdi-calendar-clock</v-icon>
                 <span class="d-none d-sm-inline">Hôm nay</span>
