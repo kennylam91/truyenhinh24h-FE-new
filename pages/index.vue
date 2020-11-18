@@ -45,6 +45,7 @@
             <v-img
               :src="channel.logo"
               class="pointer"
+              :alt="'Lịch phát sóng kênh ' + channel.name"
               @click="viewChannelDetail(channel)"
             />
           </v-card>
@@ -61,6 +62,20 @@ export default {
   components: {
     ProgramList
   },
+  asyncData({ params, store }) {
+    const categories = store.state.app.channelList
+      .map(c => c.category)
+      .filter(i => i != null)
+    const categorySet = new Set(categories)
+    const categoryMatrix = []
+    categorySet.forEach(cat => {
+      const channels = store.state.app.channelList.filter(
+        c => c.category === cat
+      )
+      categoryMatrix.push([cat, channels])
+    })
+    return { categoryMatrix }
+  },
   data() {
     return {
       broadCastingPrograms: null,
@@ -68,8 +83,8 @@ export default {
       tonightPrograms: null,
       nextDayPrograms: null,
       baseQuery: null,
-      now: +new Date(),
-      categoryMatrix: new Map()
+      now: +new Date()
+      // categoryMatrix: new Map()
     }
   },
   computed: {
@@ -89,7 +104,7 @@ export default {
     this.fetchTodayNoonPrograms()
     this.fetchTonightPrograms()
     this.fetchNextDayPrograms()
-    this.categoryMatrix = this.getCategoryMap()
+    // this.categoryMatrix = this.getCategoryMap()
   },
   methods: {
     fetchBroadCastingPrograms() {

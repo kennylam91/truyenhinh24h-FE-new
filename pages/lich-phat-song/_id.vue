@@ -94,6 +94,15 @@ export default {
   mounted() {
     this.getScheduleList(new Date())
   },
-  methods: {}
+  methods: {},
+  head() {
+    return {
+      title: `Truyền hình 24h - Lịch phát sóng kênh ${this.channel.name}`,
+      meta: [
+        { hid: 'description', name: 'description',
+          content: `Cập nhật lịch phát sóng hàng ngày và tổng hợp các chương trình hay nhất trên kênh ${this.channel.name}. ` }
+      ]
+    }
+  }
 }
 </script>

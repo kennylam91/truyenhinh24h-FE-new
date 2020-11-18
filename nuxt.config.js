@@ -6,15 +6,17 @@ export default {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s',
-    title: 'Truyenhinh24h',
+    title: 'Truyền hình 24h',
+    htmlAttrs: {
+      lang: 'vi'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content: 'Cập nhật lịch phát sóng truyền hình và tổng hợp các chương trình truyền hình nhanh, chính xác và đầy đủ nhất'
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],

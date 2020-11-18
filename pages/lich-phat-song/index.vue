@@ -89,6 +89,11 @@ import ScheduleTable from './ScheduleTable'
 export default {
   components: { ScheduleTable },
   mixins: [ScheduleMixin],
+  asyncData({ isDev, route, store, env, params, query, req, res, redirect, error }) {
+    const channelList = store.state.app.channelList
+    const channelId = channelList[0].id
+    return { channelList, channelId }
+  },
   data() {
     return {
       channelSearchResult: [],
@@ -110,13 +115,22 @@ export default {
   },
   mounted() {
     this.channelSearchResult = this.channelList
-    this.channelId = this.channelList[0].id
     this.getScheduleList()
   },
   methods: {
     onSearchChange() {
       this.getScheduleList()
     }
+  },
+  head() {
+    return {
+      title: `Truyền hình 24h - Tìm kiếm lịch phát sóng các kênh truyền hình`,
+      meta: [
+        { hid: 'description', name: 'description',
+          content: `Tìm kiếm lịch phát sóng các kênh truyền hình nhanh và chính xác nhất: HBO, Cinemax, Fox movies, Dicovery, ...` }
+      ]
+    }
   }
+
 }
 </script>
