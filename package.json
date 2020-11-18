@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/sitemap": "^2.4.0",
+    "@nuxtjs/vuetify": "^1.0.0",
     "axios": "^0.21.0",
-    "nuxt": "^2.0.0",
-    "@nuxtjs/vuetify": "^1.0.0"
+    "nuxt": "^2.0.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^4.0.0",

@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+const axios = require('axios')
 
 export default {
   mode: 'universal',
@@ -46,7 +47,20 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: [
+    '@nuxtjs/sitemap'
+  ],
+  sitemap: {
+    routes: async() => {
+      console.log('start')
+      const data = await axios.post('https://truyenhinh24h-backend.herokuapp.com/rest/v1/channels/get-all', { page: 1, limit: 999999 })
+      console.log(data)
+      return data.map((channel) => `/lich-phat-song/${channel.name}_${channel.id}`)
+    },
+    path: '/sitemap.xml',
+    gzip: true,
+    generate: false
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
