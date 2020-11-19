@@ -37,7 +37,8 @@ export default {
    */
   plugins: ['@/plugins/mixins',
     '@/plugins/filters',
-    { src: '@/plugins/gg-calendar', mode: 'client' }
+    { src: '@/plugins/gg-calendar', mode: 'client' },
+    { src: '~plugins/ga.js', mode: 'client' }
   ],
   /*
    ** Nuxt.js dev-modules
