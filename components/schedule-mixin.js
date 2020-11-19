@@ -15,7 +15,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      channelList: 'channelList'
+      // channelList: 'channelList'
     }),
     computedDateFormatted() {
       return this.formatDate(this.selectedDate)

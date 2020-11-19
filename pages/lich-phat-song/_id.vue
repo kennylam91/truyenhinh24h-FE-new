@@ -79,9 +79,10 @@ export default {
   components: { ScheduleTable },
   mixins: [ScheduleMixin],
   asyncData({ params, store }) {
+    const channelList = store.state.app.channelList
     const channelId = params.id.split('_').pop()
     return store.dispatch('app/fetchChannel', channelId).then(channel => {
-      return { channel, channelId }
+      return { channel, channelId, channelList }
     })
   },
   data() {

@@ -7,7 +7,7 @@ export default {
     }
   },
   mounted() {
-    this.addedSchedule = localStorage.addedSchedule.split(',')
+    this.addedSchedule = localStorage.addedSchedule && localStorage.addedSchedule.split(',') || []
   },
   methods: {
     isBroadCasting(schedule) {

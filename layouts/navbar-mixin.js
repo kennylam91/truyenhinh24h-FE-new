@@ -4,7 +4,7 @@ export default {
     return {
       clipped: false,
       isShowSearch: false,
-      title: 'Truyenhinh24h.live',
+      title: 'Truyền hình 24h',
       model: '',
       searchAllResults: [],
       search: null,
