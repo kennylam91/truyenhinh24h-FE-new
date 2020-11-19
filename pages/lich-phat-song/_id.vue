@@ -73,8 +73,8 @@
   </div>
 </template>
 <script>
-import ScheduleMixin from './schedule-mixin'
-import ScheduleTable from './ScheduleTable'
+import ScheduleMixin from '@/components/schedule-mixin'
+import ScheduleTable from '@/components/ScheduleTable'
 export default {
   components: { ScheduleTable },
   mixins: [ScheduleMixin],

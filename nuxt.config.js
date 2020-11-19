@@ -1,5 +1,4 @@
 import colors from 'vuetify/es5/util/colors'
-const axios = require('axios')
 
 export default {
   mode: 'universal',
@@ -50,17 +49,7 @@ export default {
   modules: [
     '@nuxtjs/sitemap'
   ],
-  sitemap: {
-    routes: async() => {
-      console.log('start')
-      const data = await axios.post('https://truyenhinh24h-backend.herokuapp.com/rest/v1/channels/get-all', { page: 1, limit: 999999 })
-      console.log(data)
-      return data.map((channel) => `/lich-phat-song/${channel.name}_${channel.id}`)
-    },
-    path: '/sitemap.xml',
-    gzip: true,
-    generate: false
-  },
+
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -90,5 +79,51 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  sitemap: {
+    // routes: [
+    //   '/lich-phat-song/HBO_1'
+    // ]
+  //   routes: async() => {
+  //     console.log('start')
+  //     const data = await axios.post('https://truyenhinh24h-backend.herokuapp.com/rest/v1/channels/get-all', { page: 1, limit: 999999 })
+  //     console.log(data)
+  //     return data.map((channel) => `/lich-phat-song/${channel.name}_${channel.id}`)
+  //   },
+  //   path: '/sitemap.xml',
+  //   gzip: true,
+  //   generate: false
+    hostname: 'https://truyenhinh24h.live',
+    path: '/sitemap.xml',
+    gzip: true,
+    exclude: [
+
+    ],
+    defaults: {
+      changefreq: 'monthly',
+      priority: 1,
+      lastmod: new Date()
+    },
+    routes: [
+      '/lich-phat-song/HBO_1',
+      'lich-phat-song/FOX-MOVIES_2',
+      'lich-phat-song/CINEMAX_3',
+      'lich-phat-song/AXN_4',
+      'lich-phat-song/DISCOVERY-ASIA_5',
+      'lich-phat-song/DISCOVERY_6',
+      'lich-phat-song/VTV1_11',
+      'lich-phat-song/VTV3_12',
+      'lich-phat-song/VTV6_13',
+      'lich-phat-song/VTV2_18',
+      'lich-phat-song/VTV4_19',
+      'lich-phat-song/THVL1_14',
+      'lich-phat-song/THVL2_15',
+      'lich-phat-song/THVL3_16',
+      'lich-phat-song/THVL4_17',
+      'lich-phat-song/TodayTV_20',
+      'lich-phat-song/HTV7_21',
+      'lich-phat-song/HTV9_22'
+
+    ]
   }
 }

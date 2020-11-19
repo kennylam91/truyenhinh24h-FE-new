@@ -58,7 +58,7 @@
   </v-row>
 </template>
 <script>
-import ProgramScheduleTable from './ProgramScheduleTable'
+import ProgramScheduleTable from '@/components/ProgramScheduleTable'
 export default {
   components: { ProgramScheduleTable },
   data() {
