@@ -4,6 +4,7 @@ export const state = () => ({
   todayNoonProgramList: null,
   toNightProgramList: null,
   broadCastingProgramList: null,
+  lastBroadCastingProgramFetch: null,
   todayProgramList: null,
   nextDaysProgramList: null
 })
@@ -26,6 +27,9 @@ export const mutations = {
   },
   SET_NEXT_DAYS_PROGRAM_LIST: (state, value) => {
     state.nextDaysProgramList = value
+  },
+  SET_LAST_BROADCASTING_PROGRAM_FETCH: (state, value) => {
+    state.lastBroadCastingProgramFetch = value
   }
 }
 
@@ -60,7 +64,16 @@ export const actions = {
       })
     })
   },
-  fetchTodayPrograms({ commit }, data) {
+  fetchTodayPrograms({ commit, state }, data) {
+    if (data.isBroadCasting) {
+      const now = new Date()
+      if (state.lastBroadCastingProgramFetch) {
+        if (+now - state.lastBroadCastingProgramFetch < 5 * 60 * 1000) {
+          return
+        }
+      }
+      commit('SET_LAST_BROADCASTING_PROGRAM_FETCH', +now)
+    }
     return request({
       url: '/programs/today',
       method: 'post',
