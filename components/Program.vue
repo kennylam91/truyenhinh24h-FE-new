@@ -87,7 +87,7 @@ export default {
   },
   data() {
     return {
-      defaultImg: require('@/assets/images/default_program_img.png')
+      defaultImg: require('@/assets/images/default_program_img.jpg')
     }
   },
   computed: {

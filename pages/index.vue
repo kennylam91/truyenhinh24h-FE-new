@@ -1,29 +1,27 @@
 <template>
   <v-container>
     <ProgramList
-      v-if="broadCastingProgramList && broadCastingProgramList.length > 0"
       class="mb-2"
       :title="'Đang chiếu'"
       :data="broadCastingProgramList"
     />
     <ProgramList
-      v-if="todayNoonProgramList && todayNoonProgramList.length > 0"
+      v-if="isBefore11h"
       class="mb-2"
       :title="'Nổi bật trưa nay'"
       :data="todayNoonProgramList"
     />
     <ProgramList
-      v-if="toNightProgramList && toNightProgramList.length > 0"
+      v-if="isBefore22h"
       class="mb-2"
       :title="'Nổi bật tối nay'"
       :data="toNightProgramList"
     />
     <keep-alive>
       <ProgramList
-        v-if="nextDaysProgramList && nextDaysProgramList.length > 0"
         class="mb-2"
         :title="'Nổi bật ngày mai'"
-        :data="nextDaysProgramList.slice(0, 9)"
+        :data="nextDaysProgramList && nextDaysProgramList.slice(0, 8)"
         :category-show="false"
         :rate-show="false"
       />
@@ -84,7 +82,7 @@ export default {
       broadCastingPrograms: null,
       baseQuery: null,
       now: +new Date(),
-      defaultImg: require('@/assets/images/default_program_img.png')
+      defaultImg: require('@/assets/images/default_program_img.jpg')
       // categoryMatrix: new Map()
     }
   },
@@ -96,7 +94,13 @@ export default {
       toNightProgramList: 'toNightProgramList',
       todayNoonProgramList: 'todayNoonProgramList',
       broadCastingProgramList: 'broadCastingProgramList'
-    })
+    }),
+    isBefore11h() {
+      return this.now <= new Date().setHours(11, 0, 0, 0)
+    },
+    isBefore22h() {
+      return this.now <= new Date().setHours(22, 0, 0, 0)
+    }
   },
   mounted() {
     this.baseQuery = {
