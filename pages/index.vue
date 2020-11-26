@@ -1,31 +1,34 @@
 <template>
   <v-container>
-    <ProgramList
-      class="mb-2"
-      :title="'Đang chiếu'"
-      :data="broadCastingProgramList"
-    />
-    <ProgramList
-      v-if="isBefore11h"
-      class="mb-2"
-      :title="'Nổi bật trưa nay'"
-      :data="todayNoonProgramList"
-    />
-    <ProgramList
-      v-if="isBefore22h"
-      class="mb-2"
-      :title="'Nổi bật tối nay'"
-      :data="toNightProgramList"
-    />
-    <keep-alive>
+    <client-only>
       <ProgramList
         class="mb-2"
-        :title="'Nổi bật ngày mai'"
-        :data="nextDaysProgramList && nextDaysProgramList.slice(0, 8)"
-        :category-show="false"
-        :rate-show="false"
+        :title="'Đang chiếu'"
+        :data="broadCastingProgramList"
       />
-    </keep-alive>
+      <ProgramList
+        v-if="isBefore11h"
+        class="mb-2"
+        :title="'Nổi bật trưa nay'"
+        :data="todayNoonProgramList"
+      />
+      <ProgramList
+        v-if="isBefore22h"
+        class="mb-2"
+        :title="'Nổi bật tối nay'"
+        :data="toNightProgramList"
+      />
+
+      <keep-alive>
+        <ProgramList
+          class="mb-2"
+          :title="'Nổi bật ngày mai'"
+          :data="nextDaysProgramList && nextDaysProgramList.slice(0, 8)"
+          :category-show="false"
+          :rate-show="false"
+        />
+      </keep-alive>
+    </client-only>
     <v-card
       v-for="categoryArr in categoryMatrix"
       :key="categoryArr[0]"
