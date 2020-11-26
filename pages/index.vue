@@ -46,6 +46,7 @@
           <v-card>
             <v-img
               :src="channel.logo"
+              :lazy-src="defaultImg"
               class="pointer"
               :alt="'Lịch phát sóng kênh ' + channel.name"
               @click="viewChannelDetail(channel)"
@@ -82,7 +83,8 @@ export default {
     return {
       broadCastingPrograms: null,
       baseQuery: null,
-      now: +new Date()
+      now: +new Date(),
+      defaultImg: require('@/assets/images/default_program_img.png')
       // categoryMatrix: new Map()
     }
   },

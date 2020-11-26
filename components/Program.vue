@@ -3,6 +3,7 @@
     <v-card class="mx-auto" outlined>
       <v-sheet>
         <v-img
+          :lazy-src="defaultImg"
           :src="program.logo || defaultImg"
           class="white--text align-end pointer"
           @click="viewProgramDetail(program)"
@@ -86,7 +87,7 @@ export default {
   },
   data() {
     return {
-      defaultImg: require('@/assets/images/default-program-picture.png')
+      defaultImg: require('@/assets/images/default_program_img.png')
     }
   },
   computed: {
