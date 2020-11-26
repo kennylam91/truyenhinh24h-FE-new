@@ -21,7 +21,7 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     script: [
-      { src: 'https://apis.google.com/js/api.js' }
+
     ]
   },
   /*
@@ -122,7 +122,28 @@ export default {
       'lich-phat-song/THVL4_17',
       'lich-phat-song/TodayTV_20',
       'lich-phat-song/HTV7_21',
-      'lich-phat-song/HTV9_22'
+      'lich-phat-song/HTV9_22',
+      'lich-phat-song/Animal-Planet_23',
+      'lich-phat-song/National-Geographic_29',
+      'lich-phat-song/VTV7_33',
+      'lich-phat-song/VTV8_34',
+      'lich-phat-song/VTV9_35',
+      'lich-phat-song/FOX-LIFE_26',
+      'lich-phat-song/HTV1_36',
+      'lich-phat-song/HTV2_37',
+      'lich-phat-song/HTV3_38',
+      'lich-phat-song/HTV-Thể-Thao_39',
+      'lich-phat-song/Cartoon-Network_24',
+      'lich-phat-song/Disney-Channel_25',
+      'lich-phat-song/FOX-SPORT_27',
+      'lich-phat-song/FOX-SPORT-2_28',
+      'lich-phat-song/SCTV-Phim-Tổng-Hợp_30',
+      'lich-phat-song/SCTV11---TV-STAR_31',
+      'lich-phat-song/SCTV14---Kênh-Phim-Việt_32',
+      'lich-phat-song/SCTV-15---Kênh-thể-thao_40',
+      'lich-phat-song/SCTV4_41',
+      'lich-phat-song/SCTV9_42',
+      'lich-phat-song/SCTV16_43'
 
     ]
   }
