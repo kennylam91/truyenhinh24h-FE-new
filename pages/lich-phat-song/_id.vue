@@ -61,6 +61,7 @@
             :schedule-list="scheduleList"
             :formatted-date="computedDateFormatted"
             :loading="tableLoading"
+            :channel-id="channelId"
           />
           <v-divider class="mx-4 mt-3" />
           <v-card-text class="d-sm-none">
@@ -80,10 +81,12 @@ export default {
   mixins: [ScheduleMixin],
   asyncData({ params, store }) {
     const channelList = store.state.app.channelList
-    const channelId = params.id.split('_').pop()
-    return store.dispatch('app/fetchChannel', channelId).then(channel => {
-      return { channel, channelId, channelList }
-    })
+    const channelId = +params.id.split('_').pop()
+    const channel = channelList.find(item => +item.id === +channelId)
+    // return store.dispatch('app/fetchChannel', channelId).then(channel => {
+    //   return { channel, channelId, channelList }
+    // })
+    return { channel, channelId, channelList }
   },
   data() {
     return {

@@ -89,6 +89,7 @@
 
     <v-dialog
       v-model="userReportDialog"
+      width="500"
     >
       <v-card>
         <v-card-title class="text-h6 orange--text">
