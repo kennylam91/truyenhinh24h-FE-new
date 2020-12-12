@@ -16,6 +16,26 @@
       <template v-slot:[`item.parsedStartTime`]="{ item }">
         <span class="white--text">{{ item.parsedStartTime }}</span>
       </template>
+      <template v-slot:header.notify="{ }">
+
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
+              color="amber"
+              dark
+              v-bind="attrs"
+              icon
+              v-on="on"
+              @click="userReportDialog = true"
+            >
+              <v-icon>
+                mdi-alert
+              </v-icon>
+            </v-btn>
+          </template>
+          <span>Báo lỗi</span>
+        </v-tooltip>
+      </template>
       <template v-slot:[`item.programName`]="{ item }">
         <div
           v-if="item.programId"
@@ -57,16 +77,45 @@
     </v-data-table>
     <v-snackbar
       v-model="alert"
-      timeout="2000"
+      timeout="3000"
       color="success"
       top
       text
       centered
       dark
     >
-      Thêm vào Google Calendar thành công
-
+      {{ alertContent }}
     </v-snackbar>
+
+    <v-dialog
+      v-model="userReportDialog"
+    >
+      <v-card>
+        <v-card-title class="text-h6 orange--text">
+          Report lịch phát sóng lỗi
+        </v-card-title>
+        <v-card-text class="text-subtitle-1">
+          Kênh: {{ channelName }}
+        </v-card-text>
+        <v-card-text>
+          <v-text-field
+            v-model="userReport.content"
+            label="Nội dung"
+            @keypress.enter.prevent="onReport"
+          />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            color="primary"
+            text
+            @click="onReport"
+          >
+            Xác nhận
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -89,6 +138,10 @@ export default {
     loading: {
       required: false,
       type: Boolean
+    },
+    channelId: {
+      required: true,
+      type: Number
     }
   },
   data() {
@@ -96,13 +149,26 @@ export default {
       scheduleTableHeaders: [
         { text: 'Time', value: 'parsedStartTime', width: 80 },
         { text: 'Chương trình', value: 'programName' },
-        { text: '', value: 'notify' }
-      ]
+        { text: '', value: 'notify', sortable: false }
+      ],
+      userReportDialog: false,
+      userReport: {
+        channelId: null,
+        content: ''
+      },
+      alertContent: 'Thêm vào Google Calendar thành công'
 
     }
   },
   methods: {
-
+    onReport() {
+      this.userReportDialog = false
+      this.userReport.channelId = this.channelId
+      this.$store.dispatch('app/createUserReport', this.userReport).then(() => {
+        this.alertContent = 'Report thành công. Cảm ơn bạn, chúng tôi sẽ kiểm tra sớm nhất!'
+        this.alert = true
+      })
+    }
   }
 }
 </script>

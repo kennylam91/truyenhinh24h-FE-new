@@ -118,5 +118,12 @@ export const actions = {
       url: '/programs/' + programId,
       method: 'get'
     })
+  },
+  createUserReport({ commit }, data) {
+    return request({
+      url: '/user-reports',
+      method: 'post',
+      data
+    })
   }
 }

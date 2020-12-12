@@ -74,10 +74,11 @@
         </v-row>
       </v-card-text>
       <schedule-table
-        :channel-name="channelName||''"
+        :channel-name="channelName"
         :schedule-list="scheduleList"
         :formatted-date="computedDateFormatted"
         :loading="tableLoading"
+        :channel-id="channelId"
       />
     </v-card>
   </div>
@@ -92,7 +93,8 @@ export default {
   asyncData({ isDev, route, store, env, params, query, req, res, redirect, error }) {
     const channelList = store.state.app.channelList
     const channelId = channelList[0].id
-    return { channelList, channelId }
+    const channelName = channelList[0].name || ''
+    return { channelList, channelId, channelName }
   },
   data() {
     return {
