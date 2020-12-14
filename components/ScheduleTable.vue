@@ -155,7 +155,8 @@ export default {
       userReportDialog: false,
       userReport: {
         channelId: null,
-        content: ''
+        content: '',
+        date: ''
       },
       alertContent: 'Thêm vào Google Calendar thành công'
 
@@ -165,6 +166,7 @@ export default {
     onReport() {
       this.userReportDialog = false
       this.userReport.channelId = this.channelId
+      this.userReport.date = this.formattedDate
       this.$store.dispatch('app/createUserReport', this.userReport).then(() => {
         this.alertContent = 'Report thành công. Cảm ơn bạn, chúng tôi sẽ kiểm tra sớm nhất!'
         this.alert = true
