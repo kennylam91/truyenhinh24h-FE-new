@@ -92,9 +92,26 @@ export default {
   mixins: [ScheduleMixin],
   asyncData({ isDev, route, store, env, params, query, req, res, redirect, error }) {
     const channelList = store.state.app.channelList
-    const channelId = channelList[0].id
-    const channelName = channelList[0].name || ''
-    return { channelList, channelId, channelName }
+    let channelId = channelList[0].id
+    let channelName = channelList[0].name || ''
+    const routerQuery = route.query
+    let dateObj = new Date()
+    let selectedDate = new Date().toISOString().substr(0, 10)
+    if (routerQuery) {
+      if (routerQuery.kenh) {
+        channelName = routerQuery.kenh
+        channelId = channelList.find(i => i.name === channelName).id || channelList[0].id
+      }
+      if (routerQuery.ngay) {
+        const dateArr = routerQuery.ngay.split('-')
+        if (dateArr.length === 3) {
+          dateObj = new Date()
+          dateObj.setFullYear(dateArr[0], dateArr[1] - 1, dateArr[2])
+          selectedDate = dateObj.toISOString().substr(0, 10)
+        }
+      }
+    }
+    return { channelList, channelId, channelName, dateObj, selectedDate }
   },
   data() {
     return {
@@ -110,6 +127,8 @@ export default {
     channelId(val) {
       const found = this.channelList.filter(channel => channel.id === val)
       this.channelName = found && found.length > 0 ? found[0].name : ''
+      this.$router.push(
+        { path: this.$route.path, query: { kenh: this.channelName, ngay: this.selectedDate }})
     }
   },
   created() {

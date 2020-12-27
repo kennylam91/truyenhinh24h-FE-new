@@ -43,6 +43,8 @@ export default {
       const [year, month, day] = this.selectedDate.split('-')
       const date = new Date(year, month - 1, day, 0, 0, 0, 0)
       this.dateObj = date
+      this.$router.push(
+        { path: this.$route.path, query: { kenh: this.channelName, ngay: this.selectedDate }})
       this.getScheduleList()
       if (
         Number(year) === now.getFullYear() &&
