@@ -79,14 +79,25 @@ import ScheduleTable from '@/components/ScheduleTable'
 export default {
   components: { ScheduleTable },
   mixins: [ScheduleMixin],
-  asyncData({ params, store }) {
+  asyncData({ params, store, route }) {
     const channelList = store.state.app.channelList
     const channelId = +params.id.split('_').pop()
     const channel = channelList.find(item => +item.id === +channelId)
+    const routerQuery = route.query
+    let dateObj = new Date()
+    let selectedDate = dateObj.toISOString().substr(0, 10)
+    if (route && route.query && route.query.ngay) {
+      const dateArr = routerQuery.ngay.split('-')
+      if (dateArr.length === 3) {
+        dateObj = new Date()
+        dateObj.setFullYear(dateArr[0], dateArr[1] - 1, dateArr[2])
+        selectedDate = dateObj.toISOString().substr(0, 10)
+      }
+    }
     // return store.dispatch('app/fetchChannel', channelId).then(channel => {
     //   return { channel, channelId, channelList }
     // })
-    return { channel, channelId, channelList }
+    return { channel, channelId, channelList, selectedDate, dateObj }
   },
   data() {
     return {

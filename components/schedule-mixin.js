@@ -33,6 +33,8 @@ export default {
         this.selectedDate = date.toISOString().substr(0, 10)
       }
       this.dateObj = date
+      this.$router.push(
+        { path: this.$route.path, query: { kenh: this.channelName, ngay: this.selectedDate }})
       this.getScheduleList()
     }
   },

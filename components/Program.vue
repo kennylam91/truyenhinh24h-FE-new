@@ -11,17 +11,18 @@
           <!-- <div class="orange--text px-2 subtitle-2">{{ program.enName }}</div> -->
         </v-img>
       </v-sheet>
-      <v-tooltip top>
-        <template v-slot:activator="{ on, attrs }">
+      <v-tooltip top open-delay="200">
+        <template v-slot:activator="{ on, attrs}">
           <v-card-title
             v-bind="attrs"
             class="truncate d-block"
-            style="font-size: 1.125rem;"
+            style="font-size: 1rem;"
             v-on="on"
+            @click="viewProgramDetail(program)"
           >
             {{ program.name }}</v-card-title>
         </template>
-        <span>{{ program.name }}</span>
+        <span style="cursor: default;">{{ program.name }}</span>
       </v-tooltip>
 
       <v-card-text class="">

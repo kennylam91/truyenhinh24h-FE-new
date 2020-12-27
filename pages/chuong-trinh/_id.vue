@@ -14,15 +14,28 @@
               {{ program.enName }}
             </v-card-subtitle>
             <v-card-text class="">
-              <v-rating
-                class="mb-2"
-                :value="program.rank"
-                color="amber"
-                dense
-                half-increments
-                readonly
-                size="16"
-              />
+              <div class="mb-3" style="display: flex; align-items: center;">
+                <v-chip
+                  class="mr-4"
+                  color="indigo"
+                  text-color="white"
+                  small
+                  label
+                >
+                  <v-icon left small>
+                    mdi-theater
+                  </v-icon>
+                  {{ program.year }}
+                </v-chip>
+                <v-rating
+                  :value="program.rank"
+                  color="amber"
+                  dense
+                  half-increments
+                  readonly
+                  size="18"
+                />
+              </div>
               <v-sheet v-if="program.categories" class="mb-2">
                 <v-chip
                   v-for="cat in program.categories"
